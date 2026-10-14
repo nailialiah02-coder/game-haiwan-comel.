@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jom Main & Belajar Bersama Cikgu!</title>
+<style>
+:root{--pink:#ff70ad;--purple:#9575e8;--blue:#69c7f4;--yellow:#ffd75e;--green:#8edb9b;--ink:#4d456b;--cream:#fffaf0}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;color:var(--ink);background:linear-gradient(#b9ecff,#e5f9ff 45%,#d5f6cb);min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:18px;font-weight:800;transition:transform .15s,filter .15s}
+button:hover{transform:translateY(-2px);filter:brightness(1.03)}
+button:focus-visible,input:focus-visible{outline:3px solid #5e5ac7;outline-offset:3px}
+.topbar{max-width:1050px;margin:auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:900;font-size:1rem}.soundrow{display:flex;gap:8px}
+.iconbtn{background:#fff;border:2px solid #d6eaff;padding:9px 12px;box-shadow:0 3px 0 #c7dff5}
+main{max-width:1050px;margin:0 auto;padding:0 16px 34px}
+.card{background:rgba(255,255,255,.94);border:4px solid #fff;border-radius:28px;box-shadow:0 8px 0 rgba(93,154,190,.18);padding:clamp(18px,4vw,34px);margin:8px auto 18px;max-width:850px}
+.hero{text-align:center;position:relative;overflow:hidden;background:linear-gradient(140deg,#fffdf4,#fff0f8)}
+h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.05;margin:8px 0 12px;color:#ed4f99;text-shadow:2px 3px #ffe0ed}
+h2{margin:4px 0 12px;color:#7658cf;font-size:clamp(1.4rem,4vw,2rem)}
+p{line-height:1.5}.subtitle{font-weight:800;font-size:1.08rem}
+.animal-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font-size:clamp(2.5rem,8vw,4.4rem);margin:16px 0}
+.pill{display:inline-block;background:#fff0a8;border-radius:999px;padding:8px 15px;font-weight:900;color:#796020}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.primary{background:var(--pink);color:white;padding:14px 24px;box-shadow:0 5px 0 #e34e91}
+.secondary{background:var(--blue);color:#174d77;padding:14px 24px;box-shadow:0 5px 0 #4ca8d9}
+.green{background:var(--green);color:#215c3c;padding:13px 20px;box-shadow:0 4px 0 #65bd7b}
+.yellow{background:var(--yellow);color:#735516;padding:13px 20px;box-shadow:0 4px 0 #e9bd3d}
+.field{display:block;text-align:left;max-width:430px;margin:20px auto 8px;font-weight:800}
+input{width:100%;padding:14px 16px;border:3px solid #e1d8ff;border-radius:16px;margin-top:7px;background:white;color:var(--ink)}
+.hidden{display:none!important}
+.status{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.badge{background:#fff1ae;border:2px solid #ffe08a;border-radius:16px;padding:9px 13px;font-weight:900}
+.progress{height:13px;background:#e8e5ff;border-radius:999px;overflow:hidden;margin:14px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff83b8,#a38aff);transition:width .3s}
+.instruction{background:#eaf8ff;border:2px dashed #94d7f5;border-radius:18px;padding:13px;margin:12px 0;font-weight:800;text-align:center}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(115px,1fr));gap:12px;margin:18px 0}
+.target{min-height:118px;background:#fff;border:3px solid #dcecff;box-shadow:0 5px 0 #d7e5f5;border-radius:22px;font-size:2rem;color:#5c4a9d;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px}
+.target small{font-size:.82rem;color:#766e91}
+.target.correct{background:#dff9e5;border-color:#72d88b}.target.wrong{background:#ffe4ee;border-color:#ff9aba}
+.feedback{min-height:32px;text-align:center;font-weight:900;margin:10px 0;color:#6b55bd}
+.question-image{font-size:5rem;text-align:center;margin:8px 0}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:18px 0}
+.option{background:#fff;border:3px solid #d9d0ff;box-shadow:0 4px 0 #d9d0ff;padding:16px 10px;font-size:1.45rem;color:#6e51c4}
+.option.correct{background:#dff9e5;border-color:#79d995;box-shadow:0 4px 0 #79d995}
+.option.wrong{background:#ffe4ee;border-color:#ff9aba;box-shadow:0 4px 0 #ff9aba}
+.smallnote{text-align:center;font-size:.9rem;opacity:.85}
+.result-score{font-size:clamp(2.3rem,7vw,4rem);color:#e74d9a;font-weight:1000;margin:8px}
+.certificate{border:5px dashed #f5c94f;background:#fffdf0;border-radius:22px;padding:22px;text-align:center;margin-top:20px}
+.certificate .big{font-size:2.8rem}
+footer{text-align:center;padding:10px 16px 26px;font-size:.85rem;color:#527e91}
+@media(max-width:500px){.topbar{padding:10px}.brand{font-size:.85rem}.card{border-radius:22px;padding:18px 14px}.target{min-height:100px}.actions button{width:100%}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">🐻🌼 KELAB HAIWAN BIJAK</div>
+  <div class="soundrow">
+    <button class="iconbtn" id="musicBtn" aria-label="Hidup atau matikan muzik">🎵 Muzik: OFF</button>
+    <button class="iconbtn" id="readBtn" aria-label="Baca arahan">🔊 Baca</button>
+  </div>
+</div>
+<main>
+  <section id="home" class="card hero">
+    <div class="pill">🌈 BELAJAR SAMBIL BERMAIN</div>
+    <h1>Jom Main & Belajar<br>Bersama Cikgu!</h1>
+    <p class="subtitle">🐰 Huruf vokal a, e, i, o, u<br>🐼 Suku kata ba, bi, bu</p>
+    <div class="animal-row" aria-label="Haiwan comel">🐰 🐻 🐱 🐼 🦊 🐸 🐝</div>
+    <p>Hai kawan-kawan! Bantu haiwan comel mengumpul huruf, kemudian jawab 10 soalan untuk kumpul mata. ⭐</p>
+    <label class="field">Nama murid
+      <input id="studentName" maxlength="30" placeholder="Contoh: Aisyah" autocomplete="given-name">
+    </label>
+    <div class="actions">
+      <button class="primary" id="startBtn">🎮 MULA BERMAIN</button>
+      <button class="secondary" id="skipGameBtn">📝 TERUS KE SOALAN</button>
+    </div>
+    <p class="smallnote">Setiap jawapan betul = 10 mata. Semoga berjaya! 💗</p>
+  </section>
+
+  <section id="game" class="card hidden">
+    <div class="status"><span class="badge" id="missionLabel">🐰 Misi 1 daripada 2</span><span class="badge">⭐ Mata: <span id="gameScore">0</span></span></div>
+    <h2 id="gameTitle">Tangkap Huruf Vokal!</h2>
+    <div class="instruction" id="gameInstruction">Tekan semua huruf vokal: a, e, i, o, u.</div>
+    <div class="progress"><span id="gameProgress"></span></div>
+    <div class="animal-row" id="gameMascot">🐰🧺</div>
+    <div class="game-grid" id="targets"></div>
+    <div class="feedback" id="gameFeedback" aria-live="polite"></div>
+    <div class="actions"><button class="primary hidden" id="nextMissionBtn">Misi seterusnya ➜</button><button class="green hidden" id="toQuizBtn">🎉 Siap! Jawab soalan</button></div>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="status"><span class="badge" id="questionCount">Soalan 1 / 10</span><span class="badge">⭐ Mata: <span id="quizScore">0</span></span></div>
+    <div class="progress"><span id="quizProgress"></span></div>
+    <h2 id="quizTitle">Jom jawab soalan!</h2>
+    <div class="question-image" id="questionImage">🍌</div>
+    <div class="instruction" id="questionText">Pilih jawapan yang betul.</div>
+    <div class="options" id="answerOptions"></div>
+    <div class="feedback" id="quizFeedback" aria-live="polite"></div>
+    <div class="actions"><button class="primary hidden" id="nextQuestionBtn">Soalan seterusnya ➜</button></div>
+  </section>
+
+  <section id="results" class="card hidden">
+    <div class="animal-row">🎉 🐻 🐰 🎉</div>
+    <h2>Keputusan Akhir</h2>
+    <p id="resultGreeting" class="subtitle">Syabas, kawan!</p>
+    <div class="result-score"><span id="finalScore">0</span> / 100</div>
+    <p id="resultMessage"></p>
+    <div class="status" style="justify-content:center"><span class="badge">✅ Betul: <span id="correctCount">0</span> / 10</span><span class="badge">📊 Markah: <span id="percent">0</span>%</span></div>
+    <div class="certificate">
+      <div class="big">🏅🌟</div>
+      <h2>Sijil Haiwan Bijak</h2>
+      <p>Sijil mini untuk</p><h2 id="certificateName">Murid Hebat</h2>
+      <p>kerana telah menyertai misi <b>Huruf Vokal & Suku Kata ba, bi, bu</b>.</p>
+      <p>Terus belajar dan terus bersinar! 🌈</p>
+    </div>
+    <div class="actions"><button class="primary" id="restartBtn">🔁 MAIN SEMULA</button><button class="secondary" id="printBtn">🖨️ CETAK SIJIL</button></div>
+  </section>
+</main>
+<footer>Dibina untuk pembelajaran prasekolah • Tekan huruf dan jawapan dengan teliti ya! 💕</footer>
+<script>
+const $ = id => document.getElementById(id);
+const sections = ["home","game","quiz","results"];
+function show(id){sections.forEach(s=>$(s).classList.toggle("hidden",s!==id));window.scrollTo({top:0,behavior:"smooth"});}
+let name="Murid", mission=0, gameScore=0, found=new Set(), quizIndex=0, quizScore=0, answered=false, musicOn=false, audioCtx=null;
+const missions=[
+ {title:"Misi 1: Tangkap Huruf Vokal",instruction:"🐰 Bantu arnab! Tekan semua huruf vokal a, e, i, o, u.",mascot:"🐰🧺",targets:["a","b","e","m","i","o","u"],correct:["a","e","i","o","u"],success:"Hebat! Semua huruf vokal berjaya dikumpulkan! 🌟"},
+ {title:"Misi 2: Kumpul Suku Kata",instruction:"🐼 Bantu panda! Cari dan tekan ba, bi dan bu.",mascot:"🐼⭐",targets:["ba","ma","bi","bu","bo","da"],correct:["ba","bi","bu"],success:"Yeay! Panda sudah jumpa ba, bi dan bu! 🐼"}
+];
+const questions=[
+ {image:"🍎",q:"Apakah huruf vokal pada pilihan berikut?",opts:["a","b","d"],a:"a",why:"A ialah huruf vokal."},
+ {image:"🐟",q:"Pilih huruf vokal yang betul.",opts:["t","e","k"],a:"e",why:"E ialah huruf vokal."},
+ {image:"🦎",q:"Yang manakah huruf vokal?",opts:["g","i","s"],a:"i",why:"I ialah huruf vokal."},
+ {image:"🐙",q:"Pilih huruf vokal.",opts:["o","p","r"],a:"o",why:"O ialah huruf vokal."},
+ {image:"🦄",q:"Huruf vokal yang manakah ini?",opts:["u","n","h"],a:"u",why:"U ialah huruf vokal."},
+ {image:"🦋",q:"Pilih suku kata yang bermula dengan bunyi /b/ dan vokal /a/.",opts:["ba","bi","bu"],a:"ba",why:"B + a membentuk suku kata ba."},
+ {image:"🐝",q:"Pilih suku kata yang betul: b + i.",opts:["bu","ba","bi"],a:"bi",why:"B + i membentuk suku kata bi."},
+ {image:"🚌",q:"Pilih suku kata yang betul: b + u.",opts:["bi","bu","ba"],a:"bu",why:"B + u membentuk suku kata bu."},
+ {image:"🐱",q:"Kucing comel ini. Pilih suku kata yang cikgu sebut: ba.",opts:["bi","ba","bu"],a:"ba",why:"Bagus! Ini suku kata ba."},
+ {image:"🎒",q:"Pilih suku kata yang berbeza bunyi vokalnya daripada ba dan bi.",opts:["ba","bi","bu"],a:"bu",why:"Betul! Bu menggunakan huruf vokal u."}
+];
+function beep(freq=660,duration=.12){try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=freq;o.connect(g);g.connect(audioCtx.destination);g.gain.value=.08;o.start();o.stop(audioCtx.currentTime+duration);}catch(e){}}
+function speak(text){if("speechSynthesis"in window){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="ms-MY";u.rate=.88;speechSynthesis.speak(u);}}
+$("readBtn").onclick=()=>speak("Hai kawan-kawan. Mari belajar huruf vokal a, e, i, o, u dan suku kata ba, bi, bu.");
+$("musicBtn").onclick=()=>{musicOn=!musicOn;$("musicBtn").textContent=musicOn?"🎵 Muzik: ON":"🎵 Muzik: OFF";if(musicOn){beep(523,.1);setTimeout(()=>beep(659,.1),140);setTimeout(()=>beep(784,.15),280)}};
+function begin(){name=$("studentName").value.trim()||"Murid";mission=0;gameScore=0;quizIndex=0;quizScore=0;found=new Set();$("gameScore").textContent=gameScore;$("quizScore").textContent=quizScore;show("game");renderMission();}
+$("startBtn").onclick=begin;
+$("skipGameBtn").onclick=()=>{name=$("studentName").value.trim()||"Murid";quizIndex=0;quizScore=0;$("quizScore").textContent=0;show("quiz");renderQuestion();};
+function renderMission(){let m=missions[mission];found=new Set();$("missionLabel").textContent=`🐾 Misi ${mission+1} daripada ${missions.length}`;$("gameTitle").textContent=m.title;$("gameInstruction").textContent=m.instruction;$("gameMascot").textContent=m.mascot;$("gameFeedback").textContent="";$("nextMissionBtn").classList.add("hidden");$("toQuizBtn").classList.add("hidden");$("gameProgress").style.width="0%";const wrap=$("targets");wrap.innerHTML="";let items=[...m.targets].sort(()=>Math.random()-.5);items.forEach((v,i)=>{let b=document.createElement("button");b.className="target";b.innerHTML=`<span>${v}</span><small>Tekan saya!</small>`;b.onclick=()=>pickTarget(b,v,m);wrap.appendChild(b)});}
+function pickTarget(btn,v,m){if(btn.disabled)return;if(m.correct.includes(v)){btn.classList.add("correct");btn.disabled=true;btn.querySelector("small").textContent="Bagus! ⭐";found.add(v);gameScore+=5;$("gameScore").textContent=gameScore;beep(760);$("gameFeedback").textContent="Pandainya! Teruskan! 🥳";$("gameProgress").style.width=(found.size/m.correct.length*100)+"%";if(found.size===m.correct.length){$("gameFeedback").textContent=m.success;$("nextMissionBtn").classList.toggle("hidden",mission!==0);$("toQuizBtn").classList.toggle("hidden",mission!==1);if(mission===1)$("toQuizBtn").focus();}}else{btn.classList.add("wrong");$("gameFeedback").textContent="Cuba lagi, kawan! Cari yang betul ya. 💗";beep(260);setTimeout(()=>btn.classList.remove("wrong"),500)}}
+$("nextMissionBtn").onclick=()=>{mission=1;renderMission()};
+$("toQuizBtn").onclick=()=>{quizIndex=0;quizScore=0;$("quizScore").textContent=0;show("quiz");renderQuestion()};
+function renderQuestion(){answered=false;const q=questions[quizIndex];$("questionCount").textContent=`Soalan ${quizIndex+1} / ${questions.length}`;$("quizProgress").style.width=(quizIndex/questions.length*100)+"%";$("questionImage").textContent=q.image;$("questionText").textContent=q.q;$("quizFeedback").textContent="";$("nextQuestionBtn").classList.add("hidden");const wrap=$("answerOptions");wrap.innerHTML="";[...q.opts].sort(()=>Math.random()-.5).forEach(v=>{let b=document.createElement("button");b.className="option";b.textContent=v;b.onclick=()=>answer(b,v,q);wrap.appendChild(b)});}
+function answer(btn,v,q){if(answered)return;answered=true;const all=[...$("answerOptions").querySelectorAll("button")];all.forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add("correct")});if(v===q.a){quizScore+=10;$("quizScore").textContent=quizScore;$("quizFeedback").textContent="Tahniah! Pandainya! ⭐ +10 mata";beep(820); }else{$("quizFeedback").textContent="Cuba lagi lain kali! Jawapan yang betul ialah "+q.a+". 💕";btn.classList.add("wrong");beep(280)}$("quizProgress").style.width=((quizIndex+1)/questions.length*100)+"%";$("nextQuestionBtn").textContent=quizIndex===questions.length-1?"Lihat keputusan 🏆":"Soalan seterusnya ➜";$("nextQuestionBtn").classList.remove("hidden");}
+$("nextQuestionBtn").onclick=()=>{if(quizIndex<questions.length-1){quizIndex++;renderQuestion()}else{showResults()}};
+function showResults(){show("results");$("finalScore").textContent=quizScore;$("correctCount").textContent=quizScore/10;$("percent").textContent=quizScore;$("resultGreeting").textContent=`Syabas, ${name}! 🐻`;$("certificateName").textContent=name;if(quizScore===100)$("resultMessage").textContent="Hebat sangat! Semua jawapan betul. Kamu memang Juara Haiwan Bijak! 🏆";else if(quizScore>=70)$("resultMessage").textContent="Bagus sekali! Kamu semakin mahir. Teruskan usaha ya! 🌟";else if(quizScore>=40)$("resultMessage").textContent="Usaha yang baik! Berlatih lagi dan kamu pasti boleh. 💗";else $("resultMessage").textContent="Jangan putus asa, kawan! Cuba main sekali lagi untuk belajar lebih banyak. 🐰";}
+$("restartBtn").onclick=()=>{show("home");$("studentName").value=name;};
+$("printBtn").onclick=()=>window.print();
+</script>
+</body>
+</html>
